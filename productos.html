@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Productos - Papelería Estrella</title>
+  <link rel="stylesheet" href="productos.css">
+</head>
+<script>
+  if (!localStorage.getItem("usuarioLogeado")) {
+    window.location.href = "index.html"; // Redirige si no hay sesión iniciada
+  }
+</script>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/477/477406.png" alt="logo" class="logo-icon" />
+      Papelería Estrella
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="dashboard.html">Admin</a></li>
+      <li><a href="#">Iniciar Sesión</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="productos-main">
+    
+    <!-- Imagen decorativa -->
+    <img src="https://pbs.twimg.com/media/FXaflinX0Aoakaw.png" 
+         alt="Decoración Derecha" 
+         class="slider-deco slider-deco-right">
+
+    <!-- PRODUCTOS -->
+    <section class="productos-grid">
+      <!-- Producto 1 -->
+      <div class="producto-card">
+        <img src="https://montblancmx.vtexassets.com/arquivos/ids/173546/__0003_106522.png?v=638381703296300000">
+        <h3 class="titulo">Sticker Pack Reimu</h3>
+        <p class="precio" data-precio="29">$29 MXN</p>
+        <div class="cantidad-control">
+          <button class="menos">-</button>
+          <input type="number" value="1" min="1">
+          <button class="mas">+</button>
+        </div>
+        <button class="agregar-btn">Agregar</button>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="producto-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCpT6369FFBzUuDllQYNmbeDhqJxtT5SvJLQ&s">
+        <h3 class="titulo">Llavero Touhou</h3>
+        <p class="precio" data-precio="39">$39 MXN</p>
+        <div class="cantidad-control">
+          <button class="menos">-</button>
+          <input type="number" value="1" min="1">
+          <button class="mas">+</button>
+        </div>
+        <button class="agregar-btn">Agregar</button>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="producto-card">
+        <img src="https://m.media-amazon.com/images/I/71-yzHg6ogL._AC_UY580_.jpg">
+        <h3 class="titulo">Figurilla Reimu</h3>
+        <p class="precio" data-precio="299">$299 MXN</p>
+        <div class="cantidad-control">
+          <button class="menos">-</button>
+          <input type="number" value="1" min="1">
+          <button class="mas">+</button>
+        </div>
+        <button class="agregar-btn">Agregar</button>
+      </div>
+
+      <!-- Producto 4 -->
+      <div class="producto-card">
+        <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSm7UbXVcaKLnXaVLmBjqtifWwyhWdUZVMDTlNxkvFXH6ZSJtxBj1M-Mc2vpQzn2HPu4rYUcj3oFJ8G9eOI8jEyltffNShdwF5yi4WqrAzdeSNagBQLZEiPfQ">
+        <h3 class="titulo">Cuaderno Mágico</h3>
+        <p class="precio" data-precio="79">$79 MXN</p>
+        <div class="cantidad-control">
+          <button class="menos">-</button>
+          <input type="number" value="1" min="1">
+          <button class="mas">+</button>
+        </div>
+        <button class="agregar-btn">Agregar</button>
+      </div>
+
+      <!-- Producto 5 -->
+      <div class="producto-card">
+        <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQITnszIGd7oJCDd6t328WkF-G_BaE0fab6soSoXF-WFqKAoDxWQQrk8yc8rn4a8x8byvfj1UTi1ycWT8sLergziqw1f0W8khqbMsLobfMGz9pTkJu-SzlZRw">
+        <h3 class="titulo">Estuche Touhou</h3>
+        <p class="precio" data-precio="59">$59 MXN</p>
+        <div class="cantidad-control">
+          <button class="menos">-</button>
+          <input type="number" value="1" min="1">
+          <button class="mas">+</button>
+        </div>
+        <button class="agregar-btn">Agregar</button>
+      </div>
+
+      <!-- Producto 6 -->
+      <div class="producto-card">
+        <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ5oFSZWUR6U4HiNGGT3Ac2NRRYf6u9ZU8lYwRCujPLUnwO45Y1EZB_TpEFy1n5-TPppE-AajesV3cqL8lLThe5E8ojHw4f17wqjaQpOsg4yME9nUMbvmdTdm4L">
+        <h3 class="titulo">Set de Stickers</h3>
+        <p class="precio" data-precio="25">$25 MXN</p>
+        <div class="cantidad-control">
+          <button class="menos">-</button>
+          <input type="number" value="1" min="1">
+          <button class="mas">+</button>
+        </div>
+        <button class="agregar-btn">Agregar</button>
+      </div>
+
+    </section>
+
+  <aside class="carrito-panel">
+  <h2>Tu carrito</h2>
+  <ul class="carrito-lista" id="carritoLista">
+    <!-- Los productos agregados aparecerán aquí -->
+  </ul>
+  <li><a href="#" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+
+
+  <button class="btn-comprar">Comprar</button>
+</aside>
+
+  </main>
+
+  <!-- SCRIPT JS -->
+  <script>
+    const carritoLista = document.getElementById("carritoLista");
+
+    document.querySelectorAll(".agregar-btn").forEach(boton => {
+      boton.addEventListener("click", () => {
+        const card = boton.closest(".producto-card");
+        const titulo = card.querySelector(".titulo").innerText;
+        const cantidad = parseInt(card.querySelector("input").value);
+        const precio = parseFloat(card.querySelector(".precio").dataset.precio);
+
+        const existente = [...carritoLista.children].find(li =>
+          li.dataset.producto === titulo
+        );
+
+        if (existente) {
+          const cantidadActual = parseInt(existente.dataset.cantidad);
+          const nuevaCantidad = cantidadActual + cantidad;
+          existente.dataset.cantidad = nuevaCantidad;
+          existente.innerText = `${titulo} × ${nuevaCantidad} = $${(precio * nuevaCantidad).toFixed(2)} MXN`;
+        } else {
+          const li = document.createElement("li");
+          li.dataset.producto = titulo;
+          li.dataset.cantidad = cantidad;
+          li.innerText = `${titulo} × ${cantidad} = $${(precio * cantidad).toFixed(2)} MXN`;
+          carritoLista.appendChild(li);
+        }
+      });
+    });
+
+    // Botones + y -
+    document.querySelectorAll(".mas").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const input = btn.parentElement.querySelector("input");
+        input.value = parseInt(input.value) + 1;
+      });
+    });
+
+    document.querySelectorAll(".menos").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const input = btn.parentElement.querySelector("input");
+        if (parseInt(input.value) > 1) {
+          input.value = parseInt(input.value) - 1;
+        }
+      });
+    });
+
+    function cerrarSesion() {
+  localStorage.removeItem("usuarioLogeado");
+  window.location.href = "index.html";
+}
+
+  </script>
+
+</body>
+</html>

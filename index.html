@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Papelería Estrella</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/477/477406.png" alt="logo" class="logo-icon" />
+      Papelería Estrella
+    </div>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="dashboard.html">Admin</a></li>
+      <li><a href="#" id="openModalBtn">Iniciar Sesión</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- BANNER -->
+  <section class="banner" id="inicio">
+    <div class="banner-overlay">
+      <div class="banner-text">
+        <h1>¡Bienvenido a tu papelería de confianza!</h1>
+        <p>Todo lo necesitas para estudiar, crear y trabajar</p>
+      </div>
+    </div>
+  </section>
+
+<div class="promo-cartel-izquierdo">
+   <img src="assets/¡Gran venta de Touhou!.png" alt="Promoción Touhou 30%" />
+      
+</div>
+
+  
+  
+
+  <!-- SECCIÓN SLIDER -->
+  <section class="productos-destacados">
+     <!-- Imagen decorativa izquierda -->
+  <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/43d851a0-c58f-469a-a05f-986ae3300a64/d350mjd-6830edc6-2586-456e-94dd-0e9f430ffb99.png" 
+  alt="Decoración Izquierda" class="slider-deco slider-deco-left">
+
+  
+<!-- Imagen decorativa derecha -->
+<img src="https://pbs.twimg.com/media/FXaflinX0Aoakaw.png" 
+  alt="Decoración Derecha" class="slider-deco slider-deco-right">
+    <div class="productos-overlay">
+      <h2>Productos Destacados</h2>
+
+      <div class="slider-container">
+        <button class="arrow left" id="prevBtn">&#10094;</button>
+        <div class="slider-track" id="sliderTrack">
+  
+            <a href="productos.html" class="slide">
+              <div class="slide-image" style="background-image: url('https://rustyhermit.com/cdn/shop/files/Notebook.jpg?v=1685601431&width=1445');">
+                <div class="slide-text-overlay">
+                  <h3>Cuaderno Touhou Ilustrado</h3>
+                  <p>Hermoso cuaderno con portada artística de Touhou. Ideal para apuntes mágicos o creativos.</p>
+                  <strong>$49 MXN</strong>
+                </div>
+              </div>
+            </a>
+          
+            <a href="productos.html" class="slide">
+              <div class="slide-image" style="background-image: url('https://m.media-amazon.com/images/I/71-yzHg6ogL._AC_UY580_.jpg');">
+                <div class="slide-text-overlay">
+                  <h3>Lapicera Flandre & Remilia</h3>
+                  <p>Estuche adorable con diseño de Flandre y Remilia. Perfecto para guardar lápices y marcadores con estilo.</p>
+                  <strong>$65 MXN</strong>
+                </div>
+              </div>
+            </a>
+          
+            <a href="productos.html" class="slide">
+              <div class="slide-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCpT6369FFBzUuDllQYNmbeDhqJxtT5SvJLQ&s');">
+                <div class="slide-text-overlay">
+                  <h3>Libreta Oficial Touhou</h3>
+                  <p>Libreta de edición especial con el logo de Touhou. Perfecta para coleccionistas y fans.</p>
+                  <strong>$55 MXN</strong>
+                </div>
+              </div>
+            </a>
+
+          
+          </div>
+          
+
+        <button class="arrow right" id="nextBtn">&#10095;</button>
+      </div>
+
+      <div class="dots" id="dotsContainer">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL LOGIN -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModalBtn">&times;</span>
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm">
+        <input type="text" id="usuario" placeholder="Usuario" required />
+        <input type="password" id="clave" placeholder="Contraseña" required />
+        <button type="submit">Entrar</button>
+      </form>
+      
+    </div>
+  </div>
+  <li><a href="#" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+
+  <script src="script.js"></script>
+  <script>
+    // Mostrar y cerrar modal
+    document.getElementById("openModalBtn").addEventListener("click", () => {
+      document.getElementById("loginModal").style.display = "block";
+    });
+  
+    document.getElementById("closeModalBtn").addEventListener("click", () => {
+      document.getElementById("loginModal").style.display = "none";
+    });
+  
+    // Control de sesión con localStorage
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Previene el reload del formulario
+  
+      const usuario = document.getElementById("usuario").value;
+      const clave = document.getElementById("clave").value;
+  
+      if (usuario === "admin" && clave === "1234") {
+        localStorage.setItem("usuarioLogeado", usuario);
+        window.location.href = "productos.html";
+      } else {
+        alert("Credenciales incorrectas");
+      }
+    });
+
+    function cerrarSesion() {
+  localStorage.removeItem("usuarioLogeado");
+  window.location.href = "index.html";
+}
+
+  </script>
+  
+</body>
+</html>
