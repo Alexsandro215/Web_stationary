@@ -1,16 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Productos - Papelería Estrella</title>
   <link rel="stylesheet" href="productos.css">
 </head>
 <script>
-  if (!localStorage.getItem("usuarioLogeado")) {
-    window.location.href = "index.html"; // Redirige si no hay sesión iniciada
-  }
+
 </script>
+
+<!-- MODAL DE LOGIN -->
+<div class="modal" id="loginModal">
+  <div class="modal-content login-enhanced">
+    <span class="close-btn" id="closeModalBtn">&times;</span>
+    <div class="login-container">
+      <div class="login-image">
+        <img
+          src="https://i.redd.it/i-drew-my-favorite-girls-v0-wes434q07f1b1.png?width=1024&format=png&auto=webp&s=d59880439c5fa6dd756f15976a9a29227ca0c03c"
+          alt="anime-girls" />
+      </div>
+      <div class="login-form">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+          <input type="text" id="usuario" placeholder="Usuario" required />
+          <input type="password" id="clave" placeholder="Contraseña" required />
+          <button type="submit">Entrar</button>
+        </form>
+        <p class="registro-link">¿No tienes cuenta? <a href="#">Regístrate</a></p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE REGISTRO -->
+<div class="modal" id="registroModal">
+  <div class="modal-content login-enhanced">
+    <span class="close-btn" id="closeRegistroBtn">&times;</span>
+    <div class="login-container">
+      <div class="login-image">
+        <img src="https://cdn-icons-png.flaticon.com/512/166/166260.png" alt="registro" />
+      </div>
+      <div class="login-form">
+        <h2>Crear Cuenta</h2>
+        <form id="registroForm">
+          <input type="text" id="nombreCompleto" placeholder="Nombre y Apellido" required />
+          <input type="text" id="nuevoUsuario" placeholder="Nombre de Usuario" required />
+          <input type="number" id="edad" placeholder="Edad" min="1" required />
+
+          <select id="genero" required>
+            <option value="" disabled selected>Selecciona tu género</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
+          </select>
+
+          <input type="email" id="correo" placeholder="Correo Electrónico" required />
+          <input type="date" id="fechaNacimiento" placeholder="Fecha de Nacimiento" required />
+          <input type="password" id="nuevaClave" placeholder="Contraseña" required />
+
+          <button type="submit">Registrarse</button>
+        </form>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- MODAL RESUMEN DE COMPRA -->
+<div class="modal" id="compraModal">
+  <div class="modal-content resumen-compra">
+    <span class="close-btn" id="cerrarCompraModal">&times;</span>
+    <h2>Resumen de Compra</h2>
+    <ul id="resumenCarritoLista" class="carrito-lista"></ul>
+
+    <p id="totalFinal" class="total-final"></p>
+    <button onclick="confirmarCompra()" class="btn-confirmar">Finalizar Compra</button>
+
+
+  </div>
+</div>
+
 
 <body>
 
@@ -24,18 +100,23 @@
       <li><a href="index.html">Inicio</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="dashboard.html">Admin</a></li>
-      <li><a href="#">Iniciar Sesión</a></li>
+      <li id="usuarioNombre" style="display:none">
+        <strong>¡Hola, <span id="nombreUsuario"></span>!</strong>
+      </li>
+      <li id="cerrarSesionNav" style="display:none">
+        <a href="#" onclick="cerrarSesion()">Cerrar Sesión</a>
+      </li>
       <li><a href="#">Contacto</a></li>
     </ul>
+
   </nav>
 
   <!-- CONTENIDO PRINCIPAL -->
   <main class="productos-main">
-    
+
     <!-- Imagen decorativa -->
-    <img src="https://pbs.twimg.com/media/FXaflinX0Aoakaw.png" 
-         alt="Decoración Derecha" 
-         class="slider-deco slider-deco-right">
+    <img src="https://pbs.twimg.com/media/FXaflinX0Aoakaw.png" alt="Decoración Derecha"
+      class="slider-deco slider-deco-right">
 
     <!-- PRODUCTOS -->
     <section class="productos-grid">
@@ -80,7 +161,8 @@
 
       <!-- Producto 4 -->
       <div class="producto-card">
-        <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSm7UbXVcaKLnXaVLmBjqtifWwyhWdUZVMDTlNxkvFXH6ZSJtxBj1M-Mc2vpQzn2HPu4rYUcj3oFJ8G9eOI8jEyltffNShdwF5yi4WqrAzdeSNagBQLZEiPfQ">
+        <img
+          src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSm7UbXVcaKLnXaVLmBjqtifWwyhWdUZVMDTlNxkvFXH6ZSJtxBj1M-Mc2vpQzn2HPu4rYUcj3oFJ8G9eOI8jEyltffNShdwF5yi4WqrAzdeSNagBQLZEiPfQ">
         <h3 class="titulo">Cuaderno Mágico</h3>
         <p class="precio" data-precio="79">$79 MXN</p>
         <div class="cantidad-control">
@@ -93,7 +175,8 @@
 
       <!-- Producto 5 -->
       <div class="producto-card">
-        <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQITnszIGd7oJCDd6t328WkF-G_BaE0fab6soSoXF-WFqKAoDxWQQrk8yc8rn4a8x8byvfj1UTi1ycWT8sLergziqw1f0W8khqbMsLobfMGz9pTkJu-SzlZRw">
+        <img
+          src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQITnszIGd7oJCDd6t328WkF-G_BaE0fab6soSoXF-WFqKAoDxWQQrk8yc8rn4a8x8byvfj1UTi1ycWT8sLergziqw1f0W8khqbMsLobfMGz9pTkJu-SzlZRw">
         <h3 class="titulo">Estuche Touhou</h3>
         <p class="precio" data-precio="59">$59 MXN</p>
         <div class="cantidad-control">
@@ -106,7 +189,8 @@
 
       <!-- Producto 6 -->
       <div class="producto-card">
-        <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ5oFSZWUR6U4HiNGGT3Ac2NRRYf6u9ZU8lYwRCujPLUnwO45Y1EZB_TpEFy1n5-TPppE-AajesV3cqL8lLThe5E8ojHw4f17wqjaQpOsg4yME9nUMbvmdTdm4L">
+        <img
+          src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ5oFSZWUR6U4HiNGGT3Ac2NRRYf6u9ZU8lYwRCujPLUnwO45Y1EZB_TpEFy1n5-TPppE-AajesV3cqL8lLThe5E8ojHw4f17wqjaQpOsg4yME9nUMbvmdTdm4L">
         <h3 class="titulo">Set de Stickers</h3>
         <p class="precio" data-precio="25">$25 MXN</p>
         <div class="cantidad-control">
@@ -119,25 +203,80 @@
 
     </section>
 
-  <aside class="carrito-panel">
-  <h2>Tu carrito</h2>
-  <ul class="carrito-lista" id="carritoLista">
-    <!-- Los productos agregados aparecerán aquí -->
-  </ul>
-  <li><a href="#" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+    <aside class="carrito-panel">
+      <h2>Tu carrito</h2>
+      <p id="mensajeVacio" style="text-align:center; font-style:italic; color:#999;">Tu carrito está vacío, ¡llénalo!
+      </p>
+
+      <ul class="carrito-lista" id="carritoLista">
+
+      </ul>
 
 
-  <button class="btn-comprar">Comprar</button>
-</aside>
+
+      <button id="btnCompra" class="btn-compra">Confirmar Compra</button>
+
+
+    </aside>
 
   </main>
 
   <!-- SCRIPT JS -->
   <script>
     const carritoLista = document.getElementById("carritoLista");
+    // Sonido al agregar producto
+    const popSound = new Audio("https://www.fesliyanstudios.com/play-mp3/387"); // o tu propio mp3 kawaii
+    popSound.volume = 0.3;
 
+
+
+    // Listener único del botón de compra
+    document.getElementById("btnCompra").addEventListener("click", () => {
+      // 🌟 EFECTO DE ESTRELLITAS 🌟
+      const btn = document.getElementById("btnCompra");
+      for (let i = 0; i < 8; i++) {
+        const estrella = document.createElement("span");
+        estrella.textContent = "★";
+        estrella.className = "estrella";
+
+        const angle = Math.random() * 360;
+        const distance = Math.random() * 80 + 30;
+        const x = Math.cos(angle) * distance + "px";
+        const y = Math.sin(angle) * distance + "px";
+
+        estrella.style.setProperty('--x', x);
+        estrella.style.setProperty('--y', y);
+
+        const rect = btn.getBoundingClientRect();
+        estrella.style.left = `${rect.left + rect.width / 2}px`;
+        estrella.style.top = `${rect.top + rect.height / 2}px`;
+        estrella.style.position = "fixed";
+
+        document.body.appendChild(estrella);
+
+        setTimeout(() => estrella.remove(), 800);
+      }
+
+      const usuarioLogeado = localStorage.getItem("usuarioLogeado");
+
+      if (!usuarioLogeado) {
+        localStorage.setItem("intencionCompra", "1");
+        document.getElementById("loginModal").style.display = "flex";
+      } else {
+        mostrarResumenCompra();
+      }
+    });
+    // Agregar producto al carrito
     document.querySelectorAll(".agregar-btn").forEach(boton => {
       boton.addEventListener("click", () => {
+        popSound.currentTime = 0;
+        popSound.play();
+        // Animación con clase
+        boton.classList.remove("agregar-animado"); // reinicia si ya tiene
+        void boton.offsetWidth; // forzar reflow para reiniciar animación
+        boton.classList.add("agregar-animado");
+
+
         const card = boton.closest(".producto-card");
         const titulo = card.querySelector(".titulo").innerText;
         const cantidad = parseInt(card.querySelector("input").value);
@@ -151,16 +290,44 @@
           const cantidadActual = parseInt(existente.dataset.cantidad);
           const nuevaCantidad = cantidadActual + cantidad;
           existente.dataset.cantidad = nuevaCantidad;
-          existente.innerText = `${titulo} × ${nuevaCantidad} = $${(precio * nuevaCantidad).toFixed(2)} MXN`;
+
+          const textoSpan = existente.querySelector(".producto-texto");
+          textoSpan.textContent = `${titulo} × ${nuevaCantidad} = $${(precio * nuevaCantidad).toFixed(2)} MXN`;
         } else {
           const li = document.createElement("li");
           li.dataset.producto = titulo;
           li.dataset.cantidad = cantidad;
-          li.innerText = `${titulo} × ${cantidad} = $${(precio * cantidad).toFixed(2)} MXN`;
+          li.style.display = "flex";
+          li.style.justifyContent = "space-between";
+          li.style.alignItems = "center";
+
+          const texto = document.createElement("span");
+          texto.classList.add("producto-texto");
+          texto.textContent = `${titulo} × ${cantidad} = $${(precio * cantidad).toFixed(2)} MXN`;
+
+          const botonEliminar = document.createElement("button");
+          botonEliminar.textContent = "✖";
+          botonEliminar.classList.add("eliminar-producto");
+          botonEliminar.style.marginLeft = "10px";
+          botonEliminar.style.background = "transparent";
+          botonEliminar.style.border = "none";
+          botonEliminar.style.color = "#ec407a";
+          botonEliminar.style.fontSize = "1.2rem";
+          botonEliminar.style.cursor = "pointer";
+
+          botonEliminar.addEventListener("click", () => {
+            li.remove();
+          });
+
+          li.appendChild(texto);
+          li.appendChild(botonEliminar);
           carritoLista.appendChild(li);
+          actualizarMensajeCarritoVacio();
+
         }
       });
     });
+
 
     // Botones + y -
     document.querySelectorAll(".mas").forEach(btn => {
@@ -179,12 +346,171 @@
       });
     });
 
+    // Login
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const usuario = document.getElementById("usuario").value;
+      const clave = document.getElementById("clave").value;
+
+      if (usuario === "admin" && clave === "1234") {
+        localStorage.setItem("usuarioLogeado", usuario);
+        document.getElementById("loginModal").style.display = "none";
+
+        // Mostrar nombre en navbar
+        document.getElementById("usuarioNombre").style.display = "inline-block";
+        document.getElementById("nombreUsuario").innerText = usuario;
+
+        // Si el usuario quería comprar antes de loguearse
+        if (localStorage.getItem("intencionCompra") === "1") {
+          localStorage.removeItem("intencionCompra");
+          mostrarResumenCompra();
+        }
+      } else {
+        alert("Credenciales incorrectas");
+      }
+    });
+
+    // Mostrar modal de login o resumen de compra
+
+
+    // Mostrar resumen de compra
+    function mostrarResumenCompra() {
+
+      const resumenLista = document.getElementById("resumenCarritoLista");
+
+      const totalFinal = document.getElementById("totalFinal");
+      resumenLista.innerHTML = "";
+      let total = 0;
+
+      [...carritoLista.children].forEach(item => {
+        const nombre = item.dataset.producto;
+        const cantidad = parseInt(item.dataset.cantidad);
+        const precioUnitario = parseFloat(item.innerText.match(/\$(\d+(\.\d+)?)/)[1]) / cantidad;
+
+        const li = document.createElement("li");
+        li.textContent = `${nombre} × ${cantidad} = $${(precioUnitario * cantidad).toFixed(2)} MXN`;
+        resumenLista.appendChild(li);
+
+        total += precioUnitario * cantidad;
+      });
+
+      totalFinal.textContent = `Total: $${total.toFixed(2)} MXN`;
+      document.getElementById("compraModal").style.display = "flex";
+    }
+
+    // Cerrar modales
+    document.getElementById("closeModalBtn").addEventListener("click", () => {
+      document.getElementById("loginModal").style.display = "none";
+    });
+
+    document.getElementById("cerrarCompraModal").addEventListener("click", () => {
+      document.getElementById("compraModal").style.display = "none";
+    });
+
+    // Confirmar compra
+    function confirmarCompra() {
+      const usuario = localStorage.getItem("usuarioLogeado");
+      if (!usuario) {
+        alert("Primero debes iniciar sesión para completar la compra.");
+        document.getElementById("loginModal").style.display = "flex";
+        return;
+      }
+
+      alert("¡Gracias por tu compra!");
+      document.getElementById("compraModal").style.display = "none";
+      document.getElementById("carritoLista").innerHTML = "";
+    }
+
+    // Mostrar nombre al recargar
+    window.addEventListener("DOMContentLoaded", () => {
+      const usuario = localStorage.getItem("usuarioLogeado");
+      if (usuario) {
+        document.getElementById("usuarioNombre").style.display = "inline-block";
+        document.getElementById("nombreUsuario").innerText = usuario;
+      }
+    });
+
     function cerrarSesion() {
-  localStorage.removeItem("usuarioLogeado");
-  window.location.href = "index.html";
-}
+      localStorage.removeItem("usuarioLogeado");
+      location.reload(); // refresca la página
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const usuario = localStorage.getItem("usuarioLogeado");
+      if (usuario) {
+        document.getElementById("usuarioNombre").style.display = "inline-block";
+        document.getElementById("nombreUsuario").innerText = usuario;
+        document.getElementById("cerrarSesionNav").style.display = "inline-block";
+      }
+    });
+
+    function actualizarMensajeCarritoVacio() {
+      const mensaje = document.getElementById("mensajeVacio");
+      if (carritoLista.children.length === 0) {
+        mensaje.style.display = "block";
+      } else {
+        mensaje.style.display = "none";
+      }
+    }
+
+    // Abrir modal de registro desde el link
+    document.querySelector(".registro-link a").addEventListener("click", (e) => {
+      e.preventDefault();
+      document.getElementById("loginModal").style.display = "none";
+      document.getElementById("registroModal").style.display = "flex";
+    });
+
+    // Cerrar modal de registro
+    document.getElementById("closeRegistroBtn").addEventListener("click", () => {
+      document.getElementById("registroModal").style.display = "none";
+    });
+
+    document.getElementById("registroForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nombreCompleto = document.getElementById("nombreCompleto").value;
+      const nuevoUsuario = document.getElementById("nuevoUsuario").value;
+      const edad = document.getElementById("edad").value;
+      const genero = document.getElementById("genero").value;
+      const correo = document.getElementById("correo").value;
+      const fechaNacimiento = document.getElementById("fechaNacimiento").value;
+      const nuevaClave = document.getElementById("nuevaClave").value;
+
+      const usuarios = JSON.parse(localStorage.getItem("usuariosRegistrados")) || {};
+      if ((usuario === "admin" && clave === "1234") || (usuarios[usuario] && usuarios[usuario].clave === clave)) {
+
+        alert("Ese nombre de usuario ya está registrado.");
+        return;
+      }
+
+      usuarios[nuevoUsuario] = {
+        nombre: nombreCompleto,
+        edad,
+        genero,
+        correo,
+        fechaNacimiento,
+        clave: nuevaClave
+      };
+
+      localStorage.setItem("usuariosRegistrados", JSON.stringify(usuarios));
+      localStorage.setItem("usuarioLogeado", nuevoUsuario);
+
+      document.getElementById("registroModal").style.display = "none";
+
+      document.getElementById("usuarioNombre").style.display = "inline-block";
+      document.getElementById("nombreUsuario").innerText = nuevoUsuario;
+      document.getElementById("cerrarSesionNav").style.display = "inline-block";
+
+      alert("¡Cuenta creada con éxito!");
+    });
+
+
 
   </script>
 
+
+
 </body>
+
 </html>

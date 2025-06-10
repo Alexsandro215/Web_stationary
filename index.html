@@ -64,7 +64,7 @@
             <a href="productos.html" class="slide">
               <div class="slide-image" style="background-image: url('https://rustyhermit.com/cdn/shop/files/Notebook.jpg?v=1685601431&width=1445');">
                 <div class="slide-text-overlay">
-                  <h3>Cuaderno Touhou Ilustrado</h3>
+                  <h3>Cuaderno Touhou Ilustrado</h3>a
                   <p>Hermoso cuaderno con portada artística de Touhou. Ideal para apuntes mágicos o creativos.</p>
                   <strong>$49 MXN</strong>
                 </div>
@@ -139,12 +139,7 @@
       const usuario = document.getElementById("usuario").value;
       const clave = document.getElementById("clave").value;
   
-      if (usuario === "admin" && clave === "1234") {
-        localStorage.setItem("usuarioLogeado", usuario);
-        window.location.href = "productos.html";
-      } else {
-        alert("Credenciales incorrectas");
-      }
+     
     });
 
     function cerrarSesion() {
